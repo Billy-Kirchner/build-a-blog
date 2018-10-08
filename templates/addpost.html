@@ -8,16 +8,16 @@
     <label for="new-title">
         Title for your new blog:
         <br>
-        <input type ="text" name="new-title" id="new-title"/>
+        <input type ="text" name="new-title" id="new-title" value='{{title}}'/>
     </label>
-    <p>{{title_error}}</p>
+    <p class='error'>{{title_error}}</p>
     <br><br>
     <label for="new-body">
         Your new blog:
         <br>
-        <textarea rows="4" cols="50" name="new-body" id="new-body"></textarea>
+        <textarea rows="4" cols="50" name="new-body" id="new-body">{{body}}</textarea>
     </label>
-    <p>{{body_error}}</p>
+    <p class='error'>{{body_error}}</p>
     <br>
     <input type="submit" value="Post!" />
 

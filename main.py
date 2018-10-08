@@ -19,13 +19,22 @@ class Blog(db.Model):
 
 @app.route('/addpost', methods=['POST','GET'])
 def addpost():
+    title = ''
+    body = ''
+    title_error = ''
+    body_error =''
     if request.method == 'POST':
         title = request.form['new-title']
         body = request.form['new-body']
-        new_blog = Blog(title, body)      
-        db.session.add(new_blog)
-        db.session.commit()
-    return render_template('addpost.html')
+        if title.strip() == '':
+            title_error = "Please enter a blog title"
+        if body.strip() == '':
+            body_error = "Please write a blog entry"
+        if title_error == '' and body_error == '':
+            new_blog = Blog(title, body)      
+            db.session.add(new_blog)
+            db.session.commit()
+    return render_template('addpost.html', title_error=title_error, body_error=body_error, title=title, body=body)
 
 @app.route("/", methods=['POST','GET'])
 def index():
