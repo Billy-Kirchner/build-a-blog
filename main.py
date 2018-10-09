@@ -34,10 +34,19 @@ def addpost():
             new_blog = Blog(title, body)      
             db.session.add(new_blog)
             db.session.commit()
+            id = new_blog.id
+            blogs = Blog.query.filter_by(id=id).all()
+            return render_template('single_entry.html', blogs=blogs)
+            
     return render_template('addpost.html', title_error=title_error, body_error=body_error, title=title, body=body)
 
 @app.route("/", methods=['POST','GET'])
 def index():
+    id = request.args.get('id')
+    if id:
+        blogs = Blog.query.filter_by(id=id).all()
+        return render_template('single_entry.html', blogs=blogs)
+
     blogs = Blog.query.all()
     return render_template('blog.html', blogs=blogs)
 
